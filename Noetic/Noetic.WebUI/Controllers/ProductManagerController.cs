@@ -9,6 +9,7 @@ using Noetic.Core.ViewModels;
 
 namespace Noetic.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductManagerController : Controller
     {
         IRepository<Product> context;

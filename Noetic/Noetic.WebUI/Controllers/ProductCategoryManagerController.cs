@@ -6,6 +6,7 @@ using Noetic.Core.Contracts;
 
 namespace Noetic.WebUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductCategoryManagerController : Controller
     {
         IRepository<ProductCategory> context;

@@ -1,9 +1,16 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Noetic.Core.Contracts;
 using Noetic.Core.Models;
 using Noetic.DataAccess.Sql;
 using Noetic.Services;
+using Noetic.WebUI.Controllers;
+using Noetic.WebUI.Models;
 using System;
+using System.Data.Entity;
 using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
 
 namespace Noetic.WebUI
 {
@@ -49,9 +56,13 @@ namespace Noetic.WebUI
             container.RegisterType<IRepository<ProductCategory>, SQLRepository<ProductCategory>>();
             container.RegisterType<IRepository<Basket>, SQLRepository<Basket>>();
             container.RegisterType<IRepository<BasketItem>, SQLRepository<BasketItem>>();
-            container.RegisterType<IBasketService, BasketService>();
+            container.RegisterType<IRepository<Customer>, SQLRepository<Customer>>();
+            container.RegisterType<IRepository<Order>, SQLRepository<Order>>();
 
-            // ASP Login
+            container.RegisterType<IBasketService, BasketService>();
+            container.RegisterType<IOrderService, OrderService>();
+
+            //// ASP Login
             //container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
             //container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
             //container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());

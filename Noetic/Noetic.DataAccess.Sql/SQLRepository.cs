@@ -2,6 +2,8 @@
 using Noetic.Core.Models;
 using System;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Noetic.DataAccess.Sql
@@ -25,6 +27,26 @@ namespace Noetic.DataAccess.Sql
         public void Commit()
         {
             context.SaveChanges();
+            //try
+            //{
+            //    context.SaveChanges();
+            //}
+            //catch (DbEntityValidationException e) // Watch Var: ((System.Data.Entity.Validation.DbEntityValidationException)$exception).EntityValidationErrors
+            //{
+            //    foreach (var eve in e.EntityValidationErrors)
+            //    {
+            //        Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+            //            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+            //        foreach (var ve in eve.ValidationErrors)
+            //        {
+            //            Debug.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+            //                ve.PropertyName,
+            //                eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+            //                ve.ErrorMessage);
+            //        }
+            //    }
+            //    throw;
+            //}
         }
 
         public void Delete(string Id)

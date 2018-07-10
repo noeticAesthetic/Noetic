@@ -13,7 +13,7 @@ namespace Noetic.Services
         IRepository<Product> productContext;
         IRepository<Basket> basketContext;
 
-        public const string BasketSessionName = "eCommerceBasket";
+        public const string BasketSessionName = "NoeticCart";
 
         public BasketService(IRepository<Product> ProductContext, IRepository<Basket> BasketContext)
         {
@@ -153,6 +153,13 @@ namespace Noetic.Services
             }
 
             return model;
+        }
+
+        public void ClearBasket(HttpContextBase httpContext)
+        {
+            Basket basket = GetBasket(httpContext, false);
+            basket.BasketItems.Clear();
+            basketContext.Commit();
         }
     }
 }

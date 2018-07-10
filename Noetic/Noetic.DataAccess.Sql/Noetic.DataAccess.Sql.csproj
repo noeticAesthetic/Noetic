@@ -56,6 +56,18 @@
     <Compile Include="Migrations\201807090641066_Basket.Designer.cs">
       <DependentUpon>201807090641066_Basket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807102218379_CustomerOrder.cs" />
+    <Compile Include="Migrations\201807102218379_CustomerOrder.Designer.cs">
+      <DependentUpon>201807102218379_CustomerOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807102255132_FixZipCode.cs" />
+    <Compile Include="Migrations\201807102255132_FixZipCode.Designer.cs">
+      <DependentUpon>201807102255132_FixZipCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807102304179_FixZipCode-ItWasRange.cs" />
+    <Compile Include="Migrations\201807102304179_FixZipCode-ItWasRange.Designer.cs">
+      <DependentUpon>201807102304179_FixZipCode-ItWasRange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -76,6 +88,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807090641066_Basket.resx">
       <DependentUpon>201807090641066_Basket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807102218379_CustomerOrder.resx">
+      <DependentUpon>201807102218379_CustomerOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807102255132_FixZipCode.resx">
+      <DependentUpon>201807102255132_FixZipCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807102304179_FixZipCode-ItWasRange.resx">
+      <DependentUpon>201807102304179_FixZipCode-ItWasRange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
