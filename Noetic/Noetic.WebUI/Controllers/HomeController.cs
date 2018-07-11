@@ -21,7 +21,8 @@ namespace Noetic.WebUI.Controllers
         public ActionResult Index(string Category = null)
         {
             List<Product> products = context.Collection().ToList() ;
-            List<ProductCategory> categories = productCategories.Collection().ToList();
+            //List<ProductCategory> categories = productCategories.Collection().ToList();
+            IEnumerable<ProductCategory> categories = productCategories.Collection().OrderBy(e => e.Category);
 
             if (Category == null)
             {

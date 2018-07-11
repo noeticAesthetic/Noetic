@@ -1,16 +1,9 @@
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Noetic.Core.Contracts;
 using Noetic.Core.Models;
 using Noetic.DataAccess.Sql;
 using Noetic.Services;
-using Noetic.WebUI.Controllers;
-using Noetic.WebUI.Models;
 using System;
-using System.Data.Entity;
 using Unity;
-using Unity.Injection;
-using Unity.Lifetime;
 
 namespace Noetic.WebUI
 {
