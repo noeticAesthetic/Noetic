@@ -89,6 +89,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BasketControllerTest.cs" />
+    <Compile Include="Mocks\MockContext.cs" />
+    <Compile Include="Mocks\MockHttpContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -98,6 +101,21 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Noetic.Core\Noetic.Core.csproj">
+      <Project>{516fc88d-e567-4c84-a3cc-987228adcc3b}</Project>
+      <Name>Noetic.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Noetic.Services\Noetic.Services.csproj">
+      <Project>{e5a0a9ab-bc00-41a2-bd45-52a68f9ffce9}</Project>
+      <Name>Noetic.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Noetic.WebUI\Noetic.WebUI.csproj">
+      <Project>{0c64abae-e909-4f13-bfb3-b71ac25da811}</Project>
+      <Name>Noetic.WebUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

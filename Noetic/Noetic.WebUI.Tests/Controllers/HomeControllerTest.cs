@@ -1,45 +1,31 @@
-﻿namespace Noetic.WebUI.Tests.Controllers
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Noetic.WebUI.Controllers;
+using Noetic.Core.Contracts;
+using Noetic.Core.Models;
+using System.Web.Mvc;
+using Noetic.Core.ViewModels;
+using System.Linq;
+
+namespace Noetic.WebUI.Tests.Controllers
 {
-    //[TestClass]
-    //public class HomeControllerTest
-    //{
-    //    [TestMethod]
-    //    public void Index()
-    //    {
-    //        // Arrange
-    //        HomeController controller = new HomeController();
+    [TestClass]
+    public class UnitTest1
+    {
+        [TestMethod]
+        public void IndexPageDoesReturnProducts()
+        {
+            IRepository<Product> productContext = new Mocks.MockContext<Product>();
+            IRepository<ProductCategory> productCatgeoryContext = new Mocks.MockContext<ProductCategory>();
 
-    //        // Act
-    //        ViewResult result = controller.Index() as ViewResult;
+            productContext.Insert(new Product());
 
-    //        // Assert
-    //        Assert.IsNotNull(result);
-    //    }
+            HomeController controller = new HomeController(productContext, productCatgeoryContext);
 
-    //    [TestMethod]
-    //    public void About()
-    //    {
-    //        // Arrange
-    //        HomeController controller = new HomeController();
+            var result = controller.Index() as ViewResult;
+            var viewModel = (ProductListViewModel)result.ViewData.Model;
 
-    //        // Act
-    //        ViewResult result = controller.About() as ViewResult;
+            Assert.AreEqual(1, viewModel.Products.Count());
 
-    //        // Assert
-    //        Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-    //    }
-
-    //    [TestMethod]
-    //    public void Contact()
-    //    {
-    //        // Arrange
-    //        HomeController controller = new HomeController();
-
-    //        // Act
-    //        ViewResult result = controller.Contact() as ViewResult;
-
-    //        // Assert
-    //        Assert.IsNotNull(result);
-    //    }
-    //}
+        }
+    }
 }
