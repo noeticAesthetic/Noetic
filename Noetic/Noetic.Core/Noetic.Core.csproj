@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_Notes\DataAnnotationNotes.txt" />
+    <Content Include="_Notes\ToDoNotes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

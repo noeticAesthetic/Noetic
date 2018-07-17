@@ -19,6 +19,7 @@ namespace Noetic.WebUI.Tests.Controllers
         {
             //setup
             IRepository<Basket> baskets = new MockContext<Basket>();
+            IRepository<BasketItem> basketItems = new MockContext<BasketItem>();
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();
             IRepository<Customer> customers = new MockContext<Customer>();
@@ -26,8 +27,8 @@ namespace Noetic.WebUI.Tests.Controllers
             var httpContext = new MockHttpContext();
 
 
-            IBasketService basketService = new BasketService(products, baskets);
-            IOrderService orderService = new OrderService(orders);
+            IBasketService basketService = new BasketService(products, baskets, basketItems);
+            IOrderService orderService = new OrderService(orders, products);
             var controller = new BasketController(basketService, orderService, customers);
             controller.ControllerContext = new System.Web.Mvc.ControllerContext(httpContext, new System.Web.Routing.RouteData(), controller);
 
@@ -48,6 +49,7 @@ namespace Noetic.WebUI.Tests.Controllers
         public void CanGetSummaryViewModel()
         {
             IRepository<Basket> baskets = new MockContext<Basket>();
+            IRepository<BasketItem> basketItems = new MockContext<BasketItem>();
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();
             IRepository<Customer> customers = new MockContext<Customer>();
@@ -60,8 +62,8 @@ namespace Noetic.WebUI.Tests.Controllers
             basket.BasketItems.Add(new BasketItem() { ProductId = "2", Quantity = 1 });
             baskets.Insert(basket);
 
-            IBasketService basketService = new BasketService(products, baskets);
-            IOrderService orderService = new OrderService(orders);
+            IBasketService basketService = new BasketService(products, baskets, basketItems);
+            IOrderService orderService = new OrderService(orders, products);
             var controller = new BasketController(basketService, orderService, customers);
 
             var httpContext = new MockHttpContext();
@@ -81,6 +83,7 @@ namespace Noetic.WebUI.Tests.Controllers
         [TestMethod]
         public void CanCheckoutAndCreateOrder()
         {
+            IRepository<BasketItem> basketItems = new MockContext<BasketItem>();
             IRepository<Customer> customers = new MockContext<Customer>();
             IRepository<Product> products = new MockContext<Product>();
             products.Insert(new Product() { Id = "1", Price = 10.00m });
@@ -93,10 +96,10 @@ namespace Noetic.WebUI.Tests.Controllers
 
             baskets.Insert(basket);
 
-            IBasketService basketService = new BasketService(products, baskets);
+            IBasketService basketService = new BasketService(products, baskets, basketItems);
 
             IRepository<Order> orders = new MockContext<Order>();
-            IOrderService orderService = new OrderService(orders);
+            IOrderService orderService = new OrderService(orders, products);
 
             customers.Insert(new Customer() { Id = "1", Email = "brett.hargreaves@gmail.com", ZipCodeShipping = "90210" });
 

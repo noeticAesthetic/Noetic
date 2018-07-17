@@ -97,12 +97,12 @@ namespace Noetic.WebUI.Controllers
                     file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
                 }
 
-                //productToEdit = product; ????????????
+                //productToEdit = product; // why doesn't this work?
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
                 productToEdit.Name = product.Name;
                 productToEdit.Price = product.Price;
-
+                productToEdit.Quantity = product.Quantity;
                 context.Commit();
 
                 return RedirectToAction("Index");

@@ -12,13 +12,15 @@ namespace Noetic.Services
     {
         IRepository<Product> productContext;
         IRepository<Basket> basketContext;
+        IRepository<BasketItem> basketItemContext; // testing diff style of deleting basketItem (delete whole record instead of BasketItem.BasketId)
 
         public const string BasketSessionName = "NoeticCart";
 
-        public BasketService(IRepository<Product> ProductContext, IRepository<Basket> BasketContext)
+        public BasketService(IRepository<Product> ProductContext, IRepository<Basket> BasketContext, IRepository<BasketItem> BasketItemContext)
         {
             this.productContext = ProductContext;
             this.basketContext = BasketContext;
+            this.basketItemContext = BasketItemContext;
         }
 
         private Basket GetBasket(HttpContextBase httpContext, bool createIfNull)
@@ -96,16 +98,34 @@ namespace Noetic.Services
             basketContext.Commit();
         }
 
+        public void UpdateQuantity(HttpContextBase httpContext, string itemId, int newQuantity)
+        {
+            Basket basket = GetBasket(httpContext, true);
+
+            BasketItem item = basketItemContext.Find(itemId);
+            item.Quantity = newQuantity;
+            basketItemContext.Commit();
+
+        }
+
         public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
         {
             Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(p => p.Id == itemId);
 
+            BasketItem item = basketItemContext.Find(itemId);
             if (item != null)
             {
-                basket.BasketItems.Remove(item);
-                basketContext.Commit();
+                basketItemContext.Delete(item.Id);
+                basketItemContext.Commit();
             }
+
+            // Old Way: Remove only BasketItem.BasketID instead of whole record
+            //BasketItem item = basket.BasketItems.FirstOrDefault(p => p.Id == itemId);
+            //if (item != null)
+            //{
+            //    basket.BasketItems.Remove(item);
+            //    basketContext.Commit();
+            //}
         }
 
         public List<BasketItemViewModel> GetBasketItems(HttpContextBase httpContext)
@@ -119,6 +139,7 @@ namespace Noetic.Services
                               select new BasketItemViewModel()
                               {
                                   Id = b.Id,
+                                  ProductId = p.Id,
                                   Quantity = b.Quantity,
                                   ProductName = p.Name,
                                   Image = p.Image,
